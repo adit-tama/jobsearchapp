@@ -18,8 +18,15 @@ const Job = ({ job }) => {
 	    				<Card.Subtitle className='text-muted mb-2'>
 	    				{ new Date(job.created_at ? job.created_at : job.publication_date).toLocaleDateString() }
 	    				</Card.Subtitle>
+	    				<Card.Subtitle className='text-muted mb-2'>
+	    				{`Source: ${job.tags ? "Remotive" : "Github Jobs" }` }
+	    				</Card.Subtitle>
 	    				<Badge variant='secondary' className='mr-2'>{ job.type ? job.type : job.job_type }</Badge>
 	    				<Badge variant='secondary' className='mr-2'>{  job.location ? job.location : job.candidate_required_location }</Badge>
+	    				<div style={{wordBreak: 'break-all'}}>
+	    					{ job.how_to_apply && <ReactMarkdown source={job.how_to_apply} /> }
+	    					{ !job.how_to_apply && <a href={job.url}>{job.url}</a> }
+	    				</div>
 	    			</div>
 	    			<img 
 	    				className="d-none d-md-block" 
@@ -30,9 +37,9 @@ const Job = ({ job }) => {
 	    		</div>
 		    	<Card.Text>
 		    		<Button
-		    			onClick={() => setOpen(prevOpen => !prevOpen)}
+		    			onClick={ () => setOpen(prevOpen => !prevOpen) }
 		    			className="mt-2" 
-		    			variant="primary"
+		    			variant={ open ? "danger" : "primary" }
 		    		>{open ? 'Hide Details' : 'Open Details'}</Button>
 		    	</Card.Text>
 		    	<Collapse in={open}>

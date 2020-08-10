@@ -27,7 +27,7 @@ function reducer(state, action) {
 	}
 }
 
-export default function useFetchJobs(params, page) {
+export default function useFetchJobs(params) {
 	const [state, dispatch] = useReducer(reducer, { jobs: [], loading: true})
 	
 	useEffect(() => {
@@ -38,7 +38,7 @@ export default function useFetchJobs(params, page) {
 		// let collectedJobs = []
 		const getGithubJobs = axios.get(BASE_URL, {
 				// cancelToken: cancelTokenUrl1,
-				params: { markdown: true, page: page, ...params} 
+				params: { markdown: true, ...params} 
 			}).then(res => res.data)
 
 		const getRemotiviJobs =  axios.get(BASE_URL2, {
@@ -66,7 +66,7 @@ export default function useFetchJobs(params, page) {
 			cancelTokenUrl1.cancel()
 			cancelTokenUrl2.cancel()
 		}
-	}, [params,page])
+	}, [params])
 
 	return state
 }
