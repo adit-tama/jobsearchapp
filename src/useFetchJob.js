@@ -38,7 +38,7 @@ export default function useFetchJobs(params, page) {
 		// let collectedJobs = []
 		const getGithubJobs = axios.get(BASE_URL, {
 				// cancelToken: cancelTokenUrl1,
-				params: { markdownd: true, page: page, ...params} 
+				params: { markdown: true, page: page, ...params} 
 			}).then(res => res.data)
 
 		const getRemotiviJobs =  axios.get(BASE_URL2, {
@@ -48,6 +48,8 @@ export default function useFetchJobs(params, page) {
 
 		const collectJobs = async () => {
 			return Promise.all([getGithubJobs,getRemotiviJobs]).then(res => {
+				console.log(res[0][1])
+				console.log(res[1][0])
 				dispatch({ type: ACTIONS.GET_DATA, payload:{
 					jobs: [...res[0], ...res[1]]
 				} })
