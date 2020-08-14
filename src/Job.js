@@ -51,7 +51,8 @@ const Job = ({ job, showDetails }) => {
 		    				setOpen(prevOpen => !prevOpen)
 		    				showDetails(job)
 		    			}}
-		    			className="mt-2" 
+		    			className="mt-2"
+		    			variant={ "info" } 
 		    		>{"See Details"}</Button>
 		    		</div>
 		    	</Card.Text>
