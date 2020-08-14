@@ -11,7 +11,7 @@ const searchForm = ({ params, onParamChange }) => {
               <Form.Label>Keyword</Form.Label>
               <Form.Control
                 onChange={onParamChange}
-                value={params.description}
+                value={params.description || ''}
                 placeholder={"Filter by: title, benefits, companies, experties"}
                 name='description'
                 type='text'
@@ -23,7 +23,7 @@ const searchForm = ({ params, onParamChange }) => {
               <Form.Label>Location</Form.Label>
               <Form.Control
                 onChange={onParamChange}
-                value={params.location}
+                value={params.location || ''}
                 placeholder={"Filter by: city, state, zip code, or country"}
                 name='location'
                 type='text'
@@ -37,7 +37,7 @@ const searchForm = ({ params, onParamChange }) => {
           <Form.Label>Keyword</Form.Label>
           <Form.Control
             onChange={onParamChange}
-            value={params.description}
+            value={params.description || ""}
             placeholder={"Filter by: title, benefits, companies, experties"}
             name='description'
             type='text'
@@ -47,7 +47,7 @@ const searchForm = ({ params, onParamChange }) => {
           <Form.Label>Location</Form.Label>
           <Form.Control
             onChange={onParamChange}
-            value={params.location}
+            value={params.location || ""}
             placeholder={"Filter by: city, state, zip code, or country"}
             name='location'
             type='text'

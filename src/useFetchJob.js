@@ -21,12 +21,14 @@ function reducer(state, action) {
 				error: action.payload.error, 
 				jobs: []
 			}
+		case ACTIONS.UPDATE_HAS_NEXT_PAGE:
+      		return { ...state, hasNextPage: action.payload.hasNextPage }
 		default:
 			return state
 	}
 }
 
-export default function useFetchJobs(params) {
+export default function useFetchJobs(params,page) {
 	const [state, dispatch] = useReducer(reducer, { jobs: [], loading: true})
 	
 	useEffect(() => {
@@ -34,31 +36,32 @@ export default function useFetchJobs(params) {
 		const cancelTokenUrl1 = axios.CancelToken.source();
 		const cancelTokenUrl2 = axios.CancelToken.source();
 
-		// let collectedJobs = []
-		const getGithubJobs = axios.get(BASE_URL, {
-				// cancelToken: cancelTokenUrl1,
-				params: { markdown: true, ...params} 
-			}).then(res => res.data)
-
-		const collectJobs = async () => {
-			return Promise.all([getGithubJobs]).then(res => {
-				dispatch({ type: ACTIONS.GET_DATA, payload:{
-					jobs: [...res[0]]
-				} })
-			})
-		}
-		
 		dispatch({ type: ACTIONS.MAKE_REQUEST })
-		collectJobs().catch((err) => {
-			if(axios.isCancel(err)) return 
-            dispatch({ type: ACTIONS.ERROR, payload:{ error: err } })
-		})
+	    axios.get(BASE_URL, {
+	      cancelToken: cancelTokenUrl1.token,
+	      params: { markdown: true, page: page, ...params }
+	    }).then(res => {
+	      dispatch({ type: ACTIONS.GET_DATA, payload: { jobs: res.data } }) 
+	    }).catch(e => {
+	      if (axios.isCancel(e)) return
+	      dispatch({ type: ACTIONS.ERROR, payload: { error: e } }) 
+	    })
+
+	     axios.get(BASE_URL, {
+			  cancelToken: cancelTokenUrl2.token,
+			  params: { markdown: true, page: page + 1, ...params }
+			}).then(res => {
+			  dispatch({ type: ACTIONS.UPDATE_HAS_NEXT_PAGE, payload: { hasNextPage: res.data.length !== 0 } }) 
+			}).catch(e => {
+			  if (axios.isCancel(e)) return
+			  dispatch({ type: ACTIONS.ERROR, payload: { error: e } }) 
+			})
 
 		return () => {
 			cancelTokenUrl1.cancel()
 			cancelTokenUrl2.cancel()
 		}
-	}, [params])
+	}, [params,page])
 
 	return state
 }

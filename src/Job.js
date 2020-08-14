@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Badge, Button, Collapse } from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
 
-const Job = ({ job, showDetails }) => {
+const Job = ({ job, showDetails, ref }) => {
 	const [open, setOpen] = React.useState(false);
 
   	return (
@@ -60,6 +60,11 @@ const Job = ({ job, showDetails }) => {
 		    	<Collapse className={"d-lg-none d-xl-none"} in={open}>
 			    	<div className="mt-4">
 			    		{ !job.tags && <ReactMarkdown source={job.description} />}
+			    		<Button
+		                  className="mt-2" 
+		                  variant={ "danger" }
+		                  onClick={() => setOpen(prevState => !prevState)}
+		                >{"Close"}</Button>
 			    	</div>
 		    	</Collapse>
 	    	</Card.Body>
