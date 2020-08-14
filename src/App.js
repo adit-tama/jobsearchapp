@@ -133,17 +133,18 @@ function App() {
           params={ params } 
           onParamChange={ handleParamChange }
         />
+        { jobs !== "No Data" && <JobsPagination page={page} setPage={setPage} hasNextPage={hasNextPage} /> }
       </Container>
       <Container className='my-4'>
         <Row>
           <Col>
             { loading && <Loading /> }
             { error && <h1>Error, Try Refreshing</h1> }
-            { jobs.length === 0 && <h5>Sorry, No Such Vacancies Available</h5>}
+            { jobs === "No Data"&& <h5>Sorry, No Such Vacancies Available</h5>}
             { jobs !== [] ? jobs.map((job, index) => {
               return <Job key={index} job={job} showDetails={showDetails} />
             }) : '' }
-            { jobs.length !== 0 && <JobsPagination page={page} setPage={setPage} hasNextPage={hasNextPage} /> }
+            { jobs !== "No Data" && <JobsPagination page={page} setPage={setPage} hasNextPage={hasNextPage} /> }
           </Col>
           <Col className={"d-none d-lg-block d-xl-block "}>
             <div style={{top:"12rem"}}className={"d-flex align-items-center justify-content-center sticky-top"}>
