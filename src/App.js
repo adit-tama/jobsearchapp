@@ -37,7 +37,7 @@ function App() {
       <Container className={"header sticky-top d-none d-lg-block d-xl-block"}>
         <Logo className={"mt-4 mb-3"}/>
         <Container className={"d-flex justify-content-end align-items-center"}>
-          <span className="text-muted">Source:  </span>
+          <span className="text-muted">Job source:  </span>
           <a href="https://jobs.github.com/" target="_blank">
             <img 
               className={"ml-1"}
@@ -55,7 +55,7 @@ function App() {
       <Container className={"header d-lg-none d-xl-none pb-1"}>
         <Logo className={"mt-4 mb-3"}/>
         <Container className={"d-flex justify-content-end align-items-center"}>
-          <span className="text-muted">Source:  </span>
+          <span className="text-muted">Job Source:  </span>
           <a href="https://jobs.github.com/" target="_blank">
             <img 
               className={"ml-1"}
