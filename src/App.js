@@ -18,8 +18,6 @@ function App() {
   const pagesCount = Math.ceil(jobs.length / pageItems);
   const [details, showDetails] = React.useState(false);
 
-  console.log(details)
-
   function handleParamChange(e) {
     const param = e.target.name
     const value = e.target.value
@@ -35,8 +33,8 @@ function App() {
       }
   };
   return (
-    <>
-      <Container className={"header sticky-top d-none d-lg-block d-xl-block pb-1"}>
+    <div>
+      <Container className={"header sticky-top d-none d-lg-block d-xl-block"}>
         <Logo className={"mt-4 mb-3"}/>
         <Container className={"d-flex justify-content-end align-items-center"}>
           <span className="text-muted">Source:  </span>
@@ -129,7 +127,7 @@ function App() {
           </Col>
         </Row>
       </Container>
-    </>
+    </div>
   );
 }
 

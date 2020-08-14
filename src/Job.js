@@ -34,7 +34,7 @@ const Job = ({ job, showDetails }) => {
 	    				src={ job.company_logo } 
 	    			/>
 	    		</div>
-		    	<Card.Text>
+		    	<div>
 		    		<div>
 		    		<Button
 		    			className={"d-lg-none d-xl-none mt-2"}
@@ -55,7 +55,7 @@ const Job = ({ job, showDetails }) => {
 		    			variant={ "info" }
 		    		>{"See Details"}</Button>
 		    		</div>
-		    	</Card.Text>
+		    	</div>
 
 		    	<Collapse className={"d-lg-none d-xl-none"} in={open}>
 			    	<div className="mt-4">

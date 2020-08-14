@@ -4,11 +4,7 @@
 
 .page-item.active .page-link {
 	background: #006666;
-	border: #006666
-}
-
-.page-link a {
-	color: grey;
+	border: #006666;
 }
 
 .page-link {
@@ -18,4 +14,3 @@
 .page-link:hover {
 	color: grey;
 }
-
