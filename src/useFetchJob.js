@@ -8,7 +8,6 @@ const ACTIONS = {
 }
 
 const BASE_URL = '//cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json';
-const BASE_URL2 = '//cors-anywhere.herokuapp.com/https://remotive.io/api/remote-jobs'
 
 function reducer(state, action) {
 	switch (action.type) {
@@ -41,17 +40,10 @@ export default function useFetchJobs(params) {
 				params: { markdown: true, ...params} 
 			}).then(res => res.data)
 
-		const getRemotiviJobs =  axios.get(BASE_URL2, {
-				// cancelToken: cancelTokenUrl2,
-				params: { limit: 65 } 
-			}).then(res => res.data.jobs)
-
 		const collectJobs = async () => {
-			return Promise.all([getGithubJobs,getRemotiviJobs]).then(res => {
-				console.log(res[0][1])
-				console.log(res[1][0])
+			return Promise.all([getGithubJobs]).then(res => {
 				dispatch({ type: ACTIONS.GET_DATA, payload:{
-					jobs: [...res[0], ...res[1]]
+					jobs: [...res[0]]
 				} })
 			})
 		}

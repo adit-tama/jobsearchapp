@@ -2,12 +2,11 @@ import React from 'react';
 import { Card, Badge, Button, Collapse } from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
 
-const Job = ({ job }) => {
+const Job = ({ job, showDetails }) => {
 	const [open, setOpen] = React.useState(false);
 
-	const remotiviLogo = 'https://remotive.io/web/image/res.company/1/logo?unique=ba45210';
   	return (
-	    <Card className='mb-3'>
+	    <Card className='card mb-3'>
 	    	<Card.Body>
 	    		<div className={"d-flex justify-content-between"}>
 	    			<div>
@@ -22,7 +21,7 @@ const Job = ({ job }) => {
 	    				{`Source: ${job.tags ? "Remotive" : "Github Jobs" }` }
 	    				</Card.Subtitle>
 	    				<Badge variant='secondary' className='mr-2'>{ job.type ? job.type : job.job_type }</Badge>
-	    				<Badge variant='secondary' className='mr-2'>{  job.location ? job.location : job.candidate_required_location }</Badge>
+	    				<Badge style={{maxWidth:"10rem"}} variant='secondary' className='mr-2'>{  job.location ? job.location : job.candidate_required_location }</Badge>
 	    				<div style={{wordBreak: 'break-all'}}>
 	    					{ job.how_to_apply && <ReactMarkdown source={job.how_to_apply} /> }
 	    					{ !job.how_to_apply && <a href={job.url}>{job.url}</a> }
@@ -32,19 +31,33 @@ const Job = ({ job }) => {
 	    				className="d-none d-md-block" 
 	    				alt="company logo"
 	    				height="30" 
-	    				src={job.company_logo ? job.company_logo : remotiviLogo} 
+	    				src={ job.company_logo } 
 	    			/>
 	    		</div>
 		    	<Card.Text>
+		    		<div>
 		    		<Button
-		    			onClick={ () => setOpen(prevOpen => !prevOpen) }
-		    			className="mt-2" 
-		    			variant={ open ? "danger" : "primary" }
+		    			className={"d-lg-none d-xl-none mt-2"}
+		    			onClick={ () => { 
+		    				setOpen(prevOpen => !prevOpen)
+		    				showDetails(job)
+		    			}}
+		    			variant={ open ? "danger" : "info" }
 		    		>{open ? 'Hide Details' : 'Open Details'}</Button>
+		    		</div>
+		    		<div className={"d-none d-lg-block d-xl-block"}>
+		    		<Button
+		    			onClick={ () => { 
+		    				setOpen(prevOpen => !prevOpen)
+		    				showDetails(job)
+		    			}}
+		    			className="mt-2" 
+		    		>{"See Details"}</Button>
+		    		</div>
 		    	</Card.Text>
-		    	<Collapse in={open}>
+
+		    	<Collapse className={"d-lg-none d-xl-none"} in={open}>
 			    	<div className="mt-4">
-			    		{ job.tags && <div dangerouslySetInnerHTML={{__html:job.description}} />}
 			    		{ !job.tags && <ReactMarkdown source={job.description} />}
 			    	</div>
 		    	</Collapse>
