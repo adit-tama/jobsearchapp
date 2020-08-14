@@ -1,0 +1,21 @@
+
+.card:hover { border-color: #006666; }
+.header { background: white; }
+
+.page-item.active .page-link {
+	background: #006666;
+	border: #006666
+}
+
+.page-link a {
+	color: grey;
+}
+
+.page-link {
+	color: grey;
+}
+
+.page-link:hover {
+	color: grey;
+}
+

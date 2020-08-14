@@ -3,8 +3,8 @@ import { Pagination } from 'react-bootstrap';
 
 const jobsPagination = ({ page, setPage, pagesCount }) => {
   return (
-    <Pagination>
-    	{ page !== 1 && <Pagination.Prev 
+    <Pagination >
+    	{ page !== 1 && <Pagination.Prev
     		onClick={ e => setPage(page - 1) } 
     	/> }
     	{ page !== 1 && <Pagination.Item>1</Pagination.Item> }
