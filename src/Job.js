@@ -52,6 +52,7 @@ const Job = ({ job, showDetails }) => {
 		    				showDetails(job)
 		    			}}
 		    			className="mt-2" 
+		    			variant={ "info" }
 		    		>{"See Details"}</Button>
 		    		</div>
 		    	</Card.Text>
